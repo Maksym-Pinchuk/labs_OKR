@@ -19,10 +19,7 @@ a:hover {
     text-decoration: underline;
 }
 
-#mobs, #gameplay, #factions {
-    color: #a3b4c6;
-    font-style: italic;
-}
+
 
 .special-text {
     color: #ffcc00 !important;
@@ -76,4 +73,29 @@ th {
 
 .game-card img:hover {
     border-color: #66c0f4;
+}
+
+.mobs {
+    color: #da5454;
+    font-style: italic;
+}
+#mobs, #gameplay, #factions {
+    color: #a3b4c6;
+    font-style: italic;
+}
+p i {
+    color: #b0c4de;
+    border-bottom: 1px dotted #b0c4de;
+}
+
+ol > li {
+    color: #a3e635;
+    font-weight: bold;
+}
+
+h1 + p {
+    background-color: #2a475e;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #66c0f4; 
 }

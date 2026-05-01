@@ -5,6 +5,8 @@
     <meta name="author" content="Maksym Pinchuk">
     <title>Огляд Minecraft</title>
     <link rel="stylesheet" href="style.css">
+    
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -13,7 +15,7 @@
         <a href="https://www.minecraft.net/en-us" target="_blank">Офіційний сайт Minecraft</a>
     </p>
 
-    <h1>Minecraft</h1>
+    <h1 id="game-title">Minecraft</h1>
 
     <p><a href="#mobs">Перейти до списку мобів 👇</a></p>
 
@@ -23,9 +25,18 @@
         <b>Світ:</b> Нескінченний
     </div>
 
-    <p style="text-align: justify; font-size: 18px;"><b>Minecraft</b> — це легендарна <i>гра-пісочниця</i> з відкритим світом. Тут гравець може будувати неймовірні споруди з кубиків, досліджувати підземелля та створювати складні механізми.</p>
+    <div style="background-color: #2a475e; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+        <h3 style="margin-top: 0;">Панель користування</h3>
+        <button onclick="compareGameTitles('Minecraft', 'Counter-Strike 2')">Порівняти назви ігор</button>
+        <button onclick="temporaryBgChange()">Змінити фон</button>
+        <button onclick="leaveSite()">Перейти на Google</button>
+    </div>
+
+    <p id="main-desc" style="text-align: justify; font-size: 18px;"><b>Minecraft</b> — це легендарна <i>гра-пісочниця</i> з відкритим світом. Тут гравець може будувати неймовірні споруди з кубиків, досліджувати підземелля та створювати складні механізми.</p>
     
     <p class="special-text">Гра має кілька режимів. Найпопулярніші з них — це виживання та творчість.</p>
+
+    <p id="temp-notice" style="color: #ff5555; text-align: center; font-weight: bold;">(Це тимчасове повідомлення буде видалено з часом)</p>
 
     <h2>Скріншот гри</h2>
     <center>
@@ -37,12 +48,14 @@
 
     <h2 class="mobs" id="mobs">Моби та ігровий процес</h2>
     
-    <h3>Головні заняття в грі:</h3>
-    <ol type="I">
-        <li>Будівництво</li>
-        <li>Дослідження світу</li>
-        <li>Виживання</li>
-    </ol>
+    <div id="activities-list">
+        <h3>Головні заняття в грі:</h3>
+        <ol type="I">
+            <li>Будівництво</li>
+            <li>Дослідження світу</li>
+            <li>Виживання</li>
+        </ol>
+    </div>
 
     <h3>Ворожі моби:</h3>
     <ul type="square">

@@ -5,8 +5,15 @@
     <meta name="author" content="Maksym Pinchuk">
     <title>Огляд Minecraft</title>
     <link rel="stylesheet" href="style.css">
-    
+
     <script src="script.js" defer></script>
+    <style>
+        .star { cursor: pointer; font-size: 24px; color: #a3b4c6; transition: color 0.2s; }
+        .star:hover { color: #ffcc00; }
+        .game-btn { background: #2a475e; color: white; border: 1px solid #66c0f4; padding: 8px 15px; border-radius: 3px; cursor: pointer; margin-right: 5px; margin-bottom: 10px;}
+        .game-btn:hover { background: #66c0f4; color: #171a21; }
+        .buy-panel { background-color: #171a21; padding: 15px; border-radius: 5px; margin-bottom: 20px; display: flex; gap: 10px; align-items: center;}
+    </style>
 </head>
 
 <body>
@@ -25,18 +32,32 @@
         <b>Світ:</b> Нескінченний
     </div>
 
-    <div style="background-color: #2a475e; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-        <h3 style="margin-top: 0;">Панель користування</h3>
-        <button onclick="compareGameTitles('Minecraft', 'Counter-Strike 2')">Порівняти назви ігор</button>
-        <button onclick="temporaryBgChange()">Змінити фон</button>
-        <button onclick="leaveSite()">Перейти на Google</button>
+    <div class="buy-panel" id="action-menu">
+        <b style="color: #a3e635; font-size: 18px;">450 ₴</b>
+        <button class="game-btn" style="background: #a3e635; color: black; font-weight: bold;" data-action="buy">🛒 Додати в кошик</button>
+        <button class="game-btn" data-action="wishlist">⭐ У бажане</button>
+        <button class="game-btn" data-action="share">🔗 Поділитися</button>
     </div>
 
-    <p id="main-desc" style="text-align: justify; font-size: 18px;"><b>Minecraft</b> — це легендарна <i>гра-пісочниця</i> з відкритим світом. Тут гравець може будувати неймовірні споруди з кубиків, досліджувати підземелля та створювати складні механізми.</p>
-    
-    <p class="special-text">Гра має кілька режимів. Найпопулярніші з них — це виживання та творчість.</p>
+    <div style="background-color: #2a475e; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+        <h3 style="margin-top: 0;">Панель користування</h3>
+        <button class="game-btn" onclick="compareGameTitles('Minecraft', 'Counter-Strike 2')">Порівняти назви ігор</button>
+        <button class="game-btn" onclick="temporaryBgChange()">Змінити фон</button>
+        <button class="game-btn" onclick="modifyDOM()">Маніпуляції з DOM</button>
+        <button class="game-btn" onclick="leaveSite()">Перейти на Google</button>
+    </div>
 
-    <p id="temp-notice" style="color: #ff5555; text-align: center; font-weight: bold;">(Це тимчасове повідомлення буде видалено з часом)</p>
+    <div>
+        <button class="game-btn" onclick="alert('Посилання скопійовано в буфер обміну!')">📋 Копіювати лінк</button>
+        <button class="game-btn" id="toggle-desc-btn">👁 Сховати опис </button>
+        <button class="game-btn" id="download-mod-btn">📥 Завантажити моди </button>
+    </div>
+
+    <div id="game-description">
+        <p id="main-desc" style="text-align: justify; font-size: 18px;"><b>Minecraft</b> — це легендарна <i>гра-пісочниця</i> з відкритим світом. Тут гравець може будувати неймовірні споруди з кубиків, досліджувати підземелля та створювати складні механізми.</p>
+        <p class="special-text">Гра має кілька режимів. Найпопулярніші з них — це виживання та творчість.</p>
+        <p id="temp-notice" style="color: #ff5555; text-align: center; font-weight: bold;">(Це тимчасове повідомлення)</p>
+    </div>
 
     <h2>Скріншот гри</h2>
     <center>
@@ -57,12 +78,30 @@
         </ol>
     </div>
 
-    <h3>Ворожі моби:</h3>
-    <ul type="square">
+    <h3>Ворожі моби (Клікніть на моба для виділення):</h3>
+    <ul type="square" id="mobs-list" style="cursor: pointer;">
         <li>Зомбі</li>
         <li>Скелети</li>
         <li>Кріпери</li>
     </ul>
+
+    <div style="background: #3a1c1c; padding: 10px; border: 1px dashed #ff5555; margin-top: 20px;">
+        <h4 style="color: #ff5555; margin-top: 0;">Секретна панель розробника</h4>
+        <button class="game-btn" id="enable-cheats-btn">Увімкнути моніторинг кліків</button>
+        <button class="game-btn" id="disable-cheats-btn" style="background: #555;">Вимкнути моніторинг (Видалити)</button>
+    </div>
+
+    <div style="background: #1b2838; padding: 15px; border-radius: 5px; margin: 20px 0; border: 1px solid #455465;">
+        <h3>Оцініть цей огляд:</h3>
+        <div id="star-rating-container">
+            <span class="star" data-behavior="rate" data-value="1">☆</span>
+            <span class="star" data-behavior="rate" data-value="2">☆</span>
+            <span class="star" data-behavior="rate" data-value="3">☆</span>
+            <span class="star" data-behavior="rate" data-value="4">☆</span>
+            <span class="star" data-behavior="rate" data-value="5">☆</span>
+            <span id="rating-result" style="margin-left: 10px; color: #a3b4c6;"></span>
+        </div>
+    </div>
 
     <h3>Термінологія:</h3>
     <dl>

@@ -143,3 +143,12 @@ h2::before {
     font-size: 14px;
     color: #a3e635;
 }
+
+.highlight {
+    background-color: #ffcc00 !important;
+    color: #171a21 !important;
+    font-weight: bold;
+    transform: scale(1.05);
+    transition: 0.2s;
+    border-radius: 4px;
+}

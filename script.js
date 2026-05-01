@@ -59,22 +59,23 @@ function leaveSite() {
 }
 
 function modifyDOM() {
-    let mainHeading = document.getElementById("main-title");
+    let mainHeading = document.getElementById("game-title"); 
     let cards = document.querySelectorAll(".game-card");
 
     if (mainHeading) {
-        mainHeading.innerHTML = "✨ Оновлений каталог ігор ✨";
+        mainHeading.innerHTML = "✨ Оновлений огляд Minecraft ✨";
     }
 
     let container = document.querySelector(".game-gallery");
     
-    let newInfo = document.createElement("div");
-    newInfo.style.color = "#a3e635";
-    newInfo.style.marginTop = "20px";
-    let textNode = document.createTextNode("Нова секція: Акції тижня!");
-    newInfo.append(textNode);
-
-    container.prepend(newInfo);
+    if (container) {
+        let newInfo = document.createElement("div");
+        newInfo.style.color = "#a3e635";
+        newInfo.style.marginTop = "20px";
+        let textNode = document.createTextNode("Нова секція: Акції тижня!");
+        newInfo.append(textNode);
+        container.prepend(newInfo);
+    }
 
     if (cards.length > 0) {
         let firstCardText = cards[0].querySelector("b").firstChild;
@@ -84,3 +85,104 @@ function modifyDOM() {
     let oldNotice = document.getElementById("temp-notice");
     if (oldNotice) oldNotice.remove();
 }
+
+let toggleBtn = document.getElementById("toggle-desc-btn");
+let descBlock = document.getElementById("game-description");
+
+if (toggleBtn && descBlock) {
+    toggleBtn.onclick = function() {
+        if (descBlock.style.display === "none") {
+            descBlock.style.display = "block";
+            toggleBtn.textContent = "👁 Сховати опис (властивість)";
+        } else {
+            descBlock.style.display = "none";
+            toggleBtn.textContent = "👁 Показати опис (властивість)";
+        }
+    };
+}
+
+let modBtn = document.getElementById("download-mod-btn");
+if (modBtn) {
+    modBtn.addEventListener("click", () => {
+        console.log("Перевірка сумісності модів з вашою версією...");
+    });
+    modBtn.addEventListener("click", () => {
+        alert("Помилка 404: Сервер модів тимчасово недоступний.");
+    });
+}
+
+let enableCheatsBtn = document.getElementById("enable-cheats-btn");
+let disableCheatsBtn = document.getElementById("disable-cheats-btn");
+
+let clickMonitor = {
+    handleEvent(event) {
+        console.log(`[Моніторинг] Зафіксовано клік на елементі: ${event.currentTarget.tagName}`);
+        alert("Спрацював об'єкт-обробник! Клік по: " + event.currentTarget.tagName);
+    }
+};
+
+if (enableCheatsBtn && disableCheatsBtn) {
+    enableCheatsBtn.addEventListener("click", clickMonitor);
+    
+    disableCheatsBtn.onclick = function() {
+        enableCheatsBtn.removeEventListener("click", clickMonitor);
+        alert("Моніторинг вимкнено (removeEventListener спрацював).");
+    };
+}
+
+let mobsList = document.getElementById("mobs-list");
+if (mobsList) {
+    mobsList.onclick = function(event) {
+        if (event.target.tagName === 'LI') {
+            for (let li of mobsList.children) {
+                li.style.borderLeft = "none";
+                li.style.paddingLeft = "0";
+                li.style.color = "inherit";
+            }
+            event.target.style.borderLeft = "4px solid #a3e635";
+            event.target.style.paddingLeft = "10px";
+            event.target.style.color = "#a3e635";
+            event.target.style.transition = "0.2s";
+        }
+    };
+}
+
+let actionMenu = document.getElementById("action-menu");
+
+let steamActions = {
+    buy() { alert("Гру додано в кошик!"); },
+    wishlist() { alert("Гру додано до списку бажаного."); },
+    share() { alert("Меню 'Поділитися' відкрито."); }
+};
+
+if (actionMenu) {
+    actionMenu.addEventListener("click", function(event) {
+        let action = event.target.dataset.action;
+        if (action && steamActions[action]) {
+            steamActions[action]();
+        }
+    });
+}
+
+document.addEventListener("click", function(event) {
+    if (event.target.dataset.behavior === "rate") {
+        let ratingValue = parseInt(event.target.dataset.value);
+        let container = event.target.parentElement;
+        let allStars = container.querySelectorAll('.star');
+        
+        allStars.forEach(star => {
+            if (parseInt(star.dataset.value) <= ratingValue) {
+                star.innerHTML = "★"; 
+                star.style.color = "#ffcc00"; 
+            } else {
+                star.innerHTML = "☆"; 
+                star.style.color = "#a3b4c6"; 
+            }
+        });
+
+        let resultSpan = document.getElementById("rating-result");
+        if (resultSpan) {
+            resultSpan.textContent = `(Ваша оцінка: ${ratingValue} з 5)`;
+        }
+    }
+});

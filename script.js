@@ -186,3 +186,74 @@ document.addEventListener("click", function(event) {
         }
     }
 });
+/* ========================================================== */
+/* 👇👇👇 ТУТ ПОЧИНАЄТЬСЯ КОД ДЛЯ 8-Ї ЛАБОРАТОРНОЇ 👇👇👇       */
+/* ========================================================== */
+
+// ==========================================
+// 1. ПЕРЕВІРКА MOUSEOVER / MOUSEOUT (Галерея)
+// ==========================================
+let gallery = document.getElementById('resource-gallery');
+let log = document.getElementById('log-info');
+
+if (gallery) {
+    gallery.onmouseover = function(event) {
+        let target = event.target.closest('.resource-item');
+        if (!target) return;
+        target.style.background = '#66c0f4';
+        target.style.transform = 'scale(1.1)';
+        
+        let from = event.relatedTarget ? event.relatedTarget.tagName : "зовні";
+        log.innerText = `Прийшли з: ${from} | Зараз на: ${target.innerText}`;
+    };
+
+    gallery.onmouseout = function(event) {
+        let target = event.target.closest('.resource-item');
+        if (!target) return;
+        target.style.background = '';
+        target.style.transform = '';
+        
+        let to = event.relatedTarget ? event.relatedTarget.tagName : "зовні";
+        log.innerText = `Пішли до: ${to}`;
+    };
+}
+
+// 2. Drag-and-Drop (mousedown, mousemove, mouseup)
+let diamond = document.getElementById('drag-diamond');
+
+if (diamond) {
+    diamond.onmousedown = function(event) {
+        // Скасовуємо стандартний Drag-and-Drop браузера
+        event.preventDefault();
+
+        // Розраховуємо зсув курсору відносно краю картинки
+        let shiftX = event.clientX - diamond.getBoundingClientRect().left;
+        let shiftY = event.clientY - diamond.getBoundingClientRect().top;
+
+        diamond.style.position = 'absolute';
+        diamond.style.zIndex = 1000;
+        document.body.append(diamond);
+
+        function moveAt(pageX, pageY) {
+            diamond.style.left = pageX - shiftX + 'px';
+            diamond.style.top = pageY - shiftY + 'px';
+        }
+
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+
+        // Слухаємо рух по всьому документу
+        document.addEventListener('mousemove', onMouseMove);
+
+        // Відпускаємо кнопку миші
+        document.onmouseup = function() {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.onmouseup = null;
+        };
+    };
+
+    diamond.ondragstart = function() {
+        return false;
+    };
+}

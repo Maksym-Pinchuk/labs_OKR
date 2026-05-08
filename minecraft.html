@@ -13,6 +13,35 @@
         .game-btn { background: #2a475e; color: white; border: 1px solid #66c0f4; padding: 8px 15px; border-radius: 3px; cursor: pointer; margin-right: 5px; margin-bottom: 10px;}
         .game-btn:hover { background: #66c0f4; color: #171a21; }
         .buy-panel { background-color: #171a21; padding: 15px; border-radius: 5px; margin-bottom: 20px; display: flex; gap: 10px; align-items: center;}
+
+        /* Стилі для 8-ї лаби */
+        .resource-item {
+            display: inline-block;
+            width: 100px;
+            padding: 10px;
+            margin: 10px;
+            background: #2a475e;
+            border: 2px solid #455465;
+            text-align: center;
+            border-radius: 5px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .inventory-box {
+            background: #171a21;
+            padding: 20px;
+            border: 2px dashed #a3e635;
+            margin-top: 20px;
+            min-height: 120px;
+            position: relative;
+        }
+        #drag-diamond {
+            width: 50px;
+            height: 50px;
+            cursor: grab;
+            position: absolute;
+            z-index: 1000;
+        }
     </style>
 </head>
 
@@ -43,7 +72,7 @@
         <h3 style="margin-top: 0;">Панель користування</h3>
         <button class="game-btn" onclick="compareGameTitles('Minecraft', 'Counter-Strike 2')">Порівняти назви ігор</button>
         <button class="game-btn" onclick="temporaryBgChange()">Змінити фон</button>
-        <button class="game-btn" onclick="modifyDOM()">Маніпуляції з DOM</button>
+        <button class="game-btn" onclick="modifyDOM()">Маніпуляції</button>
         <button class="game-btn" onclick="leaveSite()">Перейти на Google</button>
     </div>
 
@@ -67,6 +96,21 @@
         <p><i>(Натисніть на картинку, щоб відкрити повнорозмірний варіант)</i></p>
     </center>
 
+    <h2 style="color: #66c0f4;">Інтерактивні елементи</h2>
+    
+    <p>1. Наведіть на ресурс:</p>
+    <div id="resource-gallery">
+        <div class="resource-item">💎 Алмаз</div>
+        <div class="resource-item">🌕 Золото</div>
+        <div class="resource-item">💿 Залізо</div>
+    </div>
+    <p id="log-info" style="color: #a3b4c6; font-size: 0.8em; font-family: monospace;">Тут з'явиться інфо про...</p>
+
+    <p>2. Drag-and-Drop (перетягніть алмаз):</p>
+    <div class="inventory-box" id="inv-box">
+        <img src="https://img.icons8.com/color/96/minecraft-diamond.png" id="drag-diamond" alt="Diamond">
+    </div>
+ 
     <h2 class="mobs" id="mobs">Моби та ігровий процес</h2>
     
     <div id="activities-list">
@@ -107,62 +151,20 @@
     <dl>
         <dt><b>Кріпер</b></dt>
         <dd><i>Зелений моб, який безшумно підкрадається і вибухає.</i></dd>
-        <dt><b>Редстоун</b></dt>
-        <dd><i>Матеріал для створення логічних схем.</i></dd>
     </dl>
 
     <hr>
-
     <h2>Матеріали в грі</h2>
     <table>
         <caption>Базові блоки</caption>
         <tr>
-            <th>Блок 1</th>
-            <th>Блок 2</th>
-            <th>Блок 3</th>
+            <th>Блок 1</th><th>Блок 2</th><th>Блок 3</th>
         </tr>
         <tr>
             <td><img src="Planks.jpeg" alt="Дошки" width="80"></td>
             <td><img src="Cobblestone.jpeg" alt="Камінь" width="80"></td>
             <td><img src="Iron.jpeg" alt="Залізо" width="80"></td>
         </tr>
-        <tr>
-            <td>Використовується для крафту.</td>
-            <td>Базовий будівельний матеріал.</td>
-            <td>Потрібно для створення броні.</td>
-        </tr>
     </table>
-
-    <h2>Характеристики броні</h2>
-    <table>
-        <caption>Захист персонажа</caption>
-        <colgroup>
-            <col style="background-color: #2a475e;">
-            <col>
-            <col>
-        </colgroup>
-        <tr>
-            <th rowspan="2" valign="middle">Матеріал</th>
-            <th colspan="2">Рівень захисту</th>
-        </tr>
-        <tr>
-            <th>Шолом</th>
-            <th>Нагрудник</th>
-        </tr>
-        <tr>
-            <td>Шкіра</td>
-            <td>1 одиниця</td>
-            <td>3 одиниці</td>
-        </tr>
-        <tr>
-            <td>Залізо</td>
-            <td>2 одиниці</td>
-            <td>6 одиниць</td>
-        </tr>
-    </table>
-
-    <h2>Інші ігри каталогу</h2>
-    <iframe src="CS_2.html" width="100%" height="250" style="border: 2px solid #66c0f4;"></iframe>
-
 </body>
 </html>
